@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--整合mybatis-->
+<configuration>
+    <typeAliases>
+        <package name="com.shop.entity"/>
+    </typeAliases>
+
+    <!--Spring中已经配置数据源和mapper接口文件扫描器-->
+    <!--Mybatis配置文件只需要根据POJO类的路径进行别名配置-->
+
+    <!--指定映射器路径-->
+    <mappers>
+        <mapper resource="com/shop/dao/mapper/UserMapper.xml"/>
+        <mapper resource="com/shop/dao/mapper/AddressMapper.xml"/>
+        <mapper resource="com/shop/dao/mapper/GoodsMapper.xml"/>
+        <mapper resource="com/shop/dao/mapper/CategoryMapper.xml"/>
+        <mapper resource="com/shop/dao/mapper/OrderMapper.xml"/>
+        <mapper resource="com/shop/dao/mapper/OrderDetailMapper.xml"/>
+        <mapper resource="com/shop/dao/mapper/CommentMapper.xml"/>
+        <mapper resource="com/shop/dao/mapper/CartMapper.xml"/>
+        <mapper resource="com/shop/dao/mapper/VisitMapper.xml"/>
+    </mappers>
+
+</configuration>

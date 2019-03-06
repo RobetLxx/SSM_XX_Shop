@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shop.dao.UserDao">
+	<resultMap type="User" id="UserResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="password" column="password" />
+		<result property="phoneNum" column="phoneNum" />
+		<result property="money" column="money" />
+		<result property="user_img" column="user_img" />
+		<result property="regTime" column="regTime" />
+		<result property="role" column="role" />
+		<result property="status" column="status" />
+		<result property="email" column="email" />
+	</resultMap>
+
+	<insert id="addLogin" parameterType="User">
+		insert into visit
+		values(#{id},#{ip},#{userid},#{loginTime,jdbcType=CHAR})
+	</insert>
+
+	<update id="updateEmail">
+		update shopping_user set email=#{email} where id=#{id}
+	</update>
+
+	<update id="updatePhoneNum">
+		update shopping_user set phoneNum=#{phoneNum} where id=#{id}
+	</update>
+
+
+	<insert id="addUser" parameterType="User">
+		insert into shopping_user
+		values(#{id},#{name},#{password},#{phoneNum},#{money},
+		#{user_img,jdbcType=VARCHAR},#{regTime,jdbcType=CHAR},#{role},#{status},#{email})
+	</insert>
+
+	<select id="getNumByName" parameterType="String" resultType="int">
+		select count(*) from shopping_user where name=#{name}
+	</select>
+
+	<select id="getUserByNameAndPwd" parameterType="String" resultType="User">
+		select * from
+		shopping_user where name=#{name} and password=#{password}
+	</select>
+
+	<update id="updateRole">
+		update shopping_user set role=#{role} where id=#{id}
+	</update>
+
+	<update id="updatePassword">
+		update shopping_user set password=#{password} where id=#{id}
+	</update>
+
+	<update id="updateUserImg" parameterType="User">
+		update shopping_user set user_img=#{user_img} where id=#{id}
+	</update>
+
+
+	<update id="updateMoney">
+		update shopping_user set money=#{money} where id=#{id}
+	</update>
+
+
+
+	<select id="getAllUser" resultMap="UserResultMap">
+		select * from shopping_user
+	</select>
+
+	<update id="updateStatus" >
+		update shopping_user set
+		status=#{status} where id=#{id}
+	</update>
+    <!--update shop_user set-->
+    <!--status=#{1} where id=#{0}-->
+
+	<update id="deleteUser" parameterType="String">
+		update shopping_user set
+		status=2 where id=#{id}
+	</update><!--id=#{0}-->
+
+	<select id="getUser" parameterType="String" resultType="User">
+		select *
+		from shopping_user where
+		id=#{id}
+	</select><!--id=#{0}-->
+
+</mapper>

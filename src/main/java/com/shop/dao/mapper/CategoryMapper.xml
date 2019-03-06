@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shop.dao.CategoryDao">
+    <insert id="addCategory" parameterType="Category">
+        insert into shopping_category
+        values(#{id},#{name},#{goodsNum})
+    </insert>
+    <select id="getCategories" resultType="Category">
+        select * from
+        shopping_category
+    </select>
+
+    <select id="getCategoryByName" resultType="int" parameterType="String">
+        select count(*) from
+        shopping_category where name=#{name}
+    </select>
+
+    <delete id="deleteCategory" parameterType="String">
+        delete from
+        shopping_category where id=#{id}
+    </delete>
+
+    <update id="updateCategory">
+        update shopping_category set name=#{name} where id=#{id}
+    </update>
+
+    <update id="updateGoodsNum">
+        update shopping_category set goodsNum=#{goodsNum} where id=#{id}
+    </update>
+
+    <select id="getCategoryById" resultType="Category" parameterType="String">
+        select * from shopping_category where id=#{id}
+    </select>
+</mapper>

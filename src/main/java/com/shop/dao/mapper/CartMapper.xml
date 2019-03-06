@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shop.dao.CartDao">
+    <resultMap id="CartResultMap" type="Cart">
+        <id property="id" column="id"/>
+        <result property="userId" column="userId"/>
+        <result property="goodsId" column="goodsid"/>
+        <result property="num" column="num"/>
+        <result property="price" column="price"/>
+
+        <association property="goods" javaType="Goods">
+            <id property="id" column="gid"/>
+            <result property="name" column="name"/>
+            <result property="thumbnail" column="thumbnail"/>
+        </association>
+    </resultMap>
+
+    <insert id="addCart" parameterType="Cart">
+        insert into shopping_cart values (#{id},#{userId},#{goodsId},#{num},#{price});
+    </insert>
+    <update id="updateCart_add" parameterType="Cart">
+        update shopping_cart set
+        num=#{num}
+        where id=#{id}
+    </update>
+
+    <update id="updateCart_re" parameterType="Cart">
+        update shopping_cart set
+        num=#{num}
+        where id=#{id}
+
+    </update>
+    <update id="updateCart" parameterType="Cart">
+        update shopping_cart set
+        num=#{num},price=#{price}
+        where id=#{id}
+    </update>
+
+    <select id="getCartsByUserId" parameterType="String" resultMap="CartResultMap">
+        SELECT c.*,g.name,g.thumbnail
+        from shopping_cart c, shopping_goods g
+        where userid=#{userId}
+        and g.id=c.goodsid
+    </select>
+
+    <select id="getCartByUserId" resultType="Cart">
+        SELECT *
+        from shopping_cart
+        where userid=#{userId}
+        and goodsid=#{goodsid}
+    </select>
+
+    <select id="getCartById" resultType="Cart">
+        select * from shopping_cart
+        where userid=#{userid} and goodsid=#{goodsid}
+    </select>
+    <select id="getCartBycartId" resultType="Cart">
+        select * from shopping_cart
+        where id=#{id}
+    </select>
+
+    <delete id="deleteById" parameterType="String">
+        delete from shopping_cart where id=#{id}
+    </delete>
+</mapper>
